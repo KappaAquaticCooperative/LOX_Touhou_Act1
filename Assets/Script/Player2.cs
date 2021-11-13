@@ -42,39 +42,42 @@ public class Player2 : MonoBehaviour
 
     void Update()
     {
-        //尝试控制方向
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        //控制方向（用于人物的转向）
+        if (Input.GetKeyDown(KeyCode.RightArrow) && right == false)
         {
-            right = true;
+            transform.rotation = Quaternion.Euler(180, 180, 180);
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && right == true)
         {
-            right = false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+
 
         //左右移动   思路：设置速度值
         //减少漂移的方法:设置材质，增大摩擦力
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            right = false;
             rigidbody2D.velocity = new Vector2(-speed, rigidbody2D.velocity.y);
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
+            right = true;
             rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
         }
-        //跳跃   思路：给予向上的力
+        //跳跃   思路：给予向上的速度
         if (Input.GetKeyDown(KeyCode.UpArrow) && jumpFlag <= 2)
         {
             if (jumpFlag == 1)
             {
                 rigidbody2D.velocity = Vector2.zero;
-                rigidbody2D.AddForce(new Vector2(0, 350));
+                rigidbody2D.velocity += Vector2.up * 7;
             }
             //空中二段跳，跳跃力小于第一次
             if (jumpFlag == 2)
             {
                 rigidbody2D.velocity = Vector2.zero;
-                rigidbody2D.AddForce(new Vector2(0, 250));
+                rigidbody2D.velocity += Vector2.up * 4;
             }
             jumpFlag++;
         }
@@ -113,7 +116,10 @@ public class Player2 : MonoBehaviour
             jumpFlag = 1;
         if (collision.gameObject.name == "JumpItem")
         {
+            shootTime -= 0.1f;
             Destroy(collision.gameObject);
+            CerateObject.exist -= 1;
+
         }
         if (collision.gameObject.name == "Door")
         {
@@ -125,8 +131,12 @@ public class Player2 : MonoBehaviour
     //射击的方法
     public GameObject Shoot()
     {
-
+        float r = Random.Range(0f, 1f);
+        float g = Random.Range(0f, 1f);
+        float b = Random.Range(0f, 1f);
         GameObject go = GameObject.Instantiate(Bullet, this.transform.position, this.transform.rotation);
+        go.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+        
         if (right == true)
         {
             go.transform.position = this.transform.position + transform.right;
@@ -134,7 +144,7 @@ public class Player2 : MonoBehaviour
         }
         if (right == false)
         {
-            go.transform.position = this.transform.position - transform.right;
+            go.transform.position = this.transform.position + transform.right;
             go.GetComponent<Rigidbody2D>().velocity = new Vector2(-bulletSpeed, 0);
         }
         return go;

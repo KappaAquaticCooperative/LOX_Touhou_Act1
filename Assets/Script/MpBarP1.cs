@@ -15,12 +15,13 @@ public class MpBarP1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxMp = player.shootTime;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        MaxMp = player.shootTime;
         if (player)
         {
             MP = player.shootTimer;
