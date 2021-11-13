@@ -53,14 +53,15 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\CerateObject.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\MpBarP2.cs" />
     <Compile Include="Assets\Script\MpBarP1.cs" />
+    <Compile Include="Assets\Script\PlatformMove.cs" />
     <Compile Include="Assets\Script\BackGroundMove.cs" />
     <Compile Include="Assets\Script\Player2.cs" />
-    <Compile Include="Assets\Script\CerateObject.cs" />
-    <Compile Include="Assets\Script\PlatformMove.cs" />
+    <Compile Include="Assets\Transport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Task\Mission1.txt" />

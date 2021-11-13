@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
             CerateObject.exist -= 1;
         }
 
-
+        if (collision.gameObject.tag != "sukima") 
         Destroy(this.gameObject);
     }
 

@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //复活点
+    public Transform reSetPoint;
+
     //生命
     public float HP=3;
     //子弹
     public GameObject Bullet;
     public float bulletSpeed;
+    public float shootLimit;
+    public float shootDecrease;
     //方向
     static public bool right = true;
     //速度
@@ -79,12 +84,12 @@ public class Player : MonoBehaviour
             jumpFlag++;
         }
         //左右冲刺   思路：设置速度值     *参考则，空中冲刺时无视重力    //优化:在空中冲刺时限制冲刺时间
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D)&&dashTimer<dashTime)
+        if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.D)&&dashTimer<dashTime)
         {
             dashTimer += Time.deltaTime;
             rigidbody2D.velocity = new Vector2(2 * speed, 0);
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && dashTimer < dashTime)
+        if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.A) && dashTimer < dashTime)
         {
             dashTimer += Time.deltaTime;
             rigidbody2D.velocity = new Vector2(2 * -speed, 0);
@@ -102,29 +107,16 @@ public class Player : MonoBehaviour
         }
     }
     
-    //（简陋的）碰撞检测
-    //未成功的优化：尝试在开门后过一秒自动关门
-    //if (collision.gameObject.name == "Door")
-    //    {
-    //        collision.gameObject.SetActive(false);
-    //        for (doorTimer = doorTime;doorTimer<=5;doorTimer+=Time.deltaTime)
-    //        {
-    //            if (doorTimer >= 4.5)
-    //            {
-    //                collision.gameObject.SetActive(true);
-    //            }
-    //        }
-    //    }
-
     //碰撞检测
     public void OnCollisionEnter2D(Collision2D collision)
     {
         dashTimer = 0;
-        if (collision.gameObject.name != "Wall")
+        if (collision.gameObject.tag == "IsGround")
         jumpFlag = 1;
         if (collision.gameObject.name == "JumpItem")
         {
-            shootTime -= 0.1f;
+            if (shootTime > shootLimit)
+                shootTime -= shootDecrease;
             Destroy(collision.gameObject);
             CerateObject.exist -= 1;
         }
@@ -159,7 +151,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         this.HP -= damage;
-
+        this.transform.position = reSetPoint.transform.position;
+        this.rigidbody2D.velocity = new Vector2(0, 0);
         if (HP <= 0)
         {
             Destroy(this.gameObject);

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Player2 : MonoBehaviour
 {
+    //复活点
+    public Transform reSetPoint;
     //生命
     public float HP = 3;
 
     //子弹
     public GameObject Bullet;
     public float bulletSpeed;
-
+    public float shootLimit;
+    public float shootDecrease;
     //方向
     static public bool right = true;
 
@@ -82,19 +85,19 @@ public class Player2 : MonoBehaviour
             jumpFlag++;
         }
         //左右冲刺   思路：设置速度值     *参考则，空中冲刺时无视重力    //优化:在空中冲刺时限制冲刺时间
-        if (Input.GetKey(KeyCode.RightShift) && Input.GetKey(KeyCode.RightArrow) && dashTimer < dashTime)
+        if (Input.GetKey(KeyCode.Keypad2) && Input.GetKey(KeyCode.RightArrow) && dashTimer < dashTime)
         {
             dashTimer += Time.deltaTime;
             rigidbody2D.velocity = new Vector2(2 * speed, 0);
         }
-        if (Input.GetKey(KeyCode.RightShift) && Input.GetKey(KeyCode.LeftArrow) && dashTimer < dashTime)
+        if (Input.GetKey(KeyCode.Keypad2) && Input.GetKey(KeyCode.LeftArrow) && dashTimer < dashTime)
         {
             dashTimer += Time.deltaTime;
             rigidbody2D.velocity = new Vector2(2 * -speed, 0);
         }
 
         //射击
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKey(KeyCode.Keypad1))
         {
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootTime)
@@ -112,11 +115,12 @@ public class Player2 : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         dashTimer = 0;//和其他物体碰撞后冲刺时间重置
-        if (collision.gameObject.name != "Wall")
+        if (collision.gameObject.tag == "IsGround")
             jumpFlag = 1;
         if (collision.gameObject.name == "JumpItem")
         {
-            shootTime -= 0.1f;
+            if(shootTime>shootLimit)
+            shootTime -= shootDecrease;
             Destroy(collision.gameObject);
             CerateObject.exist -= 1;
 
@@ -154,6 +158,8 @@ public class Player2 : MonoBehaviour
     public void TakeDamage(float damage)
     {
         this.HP -= damage;
+        this.transform.position = reSetPoint.transform.position;
+        this.rigidbody2D.velocity = new Vector2(0, 0);
         if (HP <= 0)
         {
             Destroy(this.gameObject);
