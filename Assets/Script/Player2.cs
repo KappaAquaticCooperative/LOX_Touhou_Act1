@@ -8,7 +8,7 @@ public class Player2 : MonoBehaviour
     public Transform reSetPoint;
     //生命
     public float HP = 3;
-
+    public float maxHP = 3;
     //子弹
     public GameObject Bullet;
     public float bulletSpeed;
@@ -117,20 +117,8 @@ public class Player2 : MonoBehaviour
         dashTimer = 0;//和其他物体碰撞后冲刺时间重置
         if (collision.gameObject.tag == "IsGround")
             jumpFlag = 1;
-        if (collision.gameObject.name == "JumpItem")
-        {
-            if(shootTime>shootLimit)
-            shootTime -= shootDecrease;
-            Destroy(collision.gameObject);
-            CerateObject.exist -= 1;
-
-        }
-        if (collision.gameObject.name == "Door")
-        {
-            Destroy(collision.gameObject);
-
-        }
-
+        if (collision.gameObject.name == "Door")      
+            Destroy(collision.gameObject);       
     }
     //射击的方法
     public GameObject Shoot()

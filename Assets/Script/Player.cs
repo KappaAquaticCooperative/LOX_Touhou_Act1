@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
 {
     //复活点
     public Transform reSetPoint;
+    
 
     //生命
     public float HP=3;
+    public float maxHP = 3;
     //子弹
     public GameObject Bullet;
     public float bulletSpeed;
@@ -58,14 +60,18 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             right = false;
-            
+
             rigidbody2D.velocity = new Vector2(-speed, rigidbody2D.velocity.y);
+            
+
         }
         if (Input.GetKey(KeyCode.D))
         {
             right = true;
             
             rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+            //transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            //transform.position += new Vector3(speed * Time.deltaTime, 0, 0); 
         }
         //跳跃   思路：给予向上的速度
         if (Input.GetKeyDown(KeyCode.W)&&jumpFlag<=2)
@@ -110,15 +116,11 @@ public class Player : MonoBehaviour
     //碰撞检测
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        dashTimer = 0;
+        
         if (collision.gameObject.tag == "IsGround")
-        jumpFlag = 1;
-        if (collision.gameObject.name == "JumpItem")
         {
-            if (shootTime > shootLimit)
-                shootTime -= shootDecrease;
-            Destroy(collision.gameObject);
-            CerateObject.exist -= 1;
+            dashTimer = 0;
+            jumpFlag = 1;
         }
         if (collision.gameObject.name == "Door")
             Destroy(collision.gameObject);

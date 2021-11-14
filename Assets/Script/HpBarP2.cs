@@ -2,30 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class MpBarP1 : MonoBehaviour
+public class HpBarP2 : MonoBehaviour
 {
-    public float MaxMp;
-    public float MP;
+    public float maxHp;
+    public float nowHp;
     public Image bar;
-
-    public Player player;
-
-
+    public Player2 player2;
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxHp = player2.maxHP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MaxMp = player.shootTime;
-        if (player)
-        {
-            MP = player.shootTimer;
-            bar.fillAmount = MP / MaxMp;
-        }
+        nowHp = player2.HP;
+        bar.fillAmount = nowHp / maxHp;
     }
 }

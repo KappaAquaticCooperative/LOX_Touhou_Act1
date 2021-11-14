@@ -19,9 +19,6 @@ public class Transport : MonoBehaviour
     void Update()
     {
         workTimer += Time.deltaTime;
-        
-        Debug.Log(workTimer);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlatformMove : MonoBehaviour
 {
     public float speed;
+    //思路：获取这两个参照物的X坐标，物体在之间移动，超过其中一方X坐标时方向相反
     public Transform moveGoal;
     public Transform moveBack;
+    //移动方向判定
     public bool moveDirection=true;
-
+    //设置平台移动的起点与终点
     private Vector3 goal;
     private Vector3 back;
     private Rigidbody2D rigidbody2D;
