@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformMove : MonoBehaviour
+public class X_PlatformMove : MonoBehaviour
 {
     public float speed;
     //思路：获取这两个参照物的X坐标，物体在之间移动，超过其中一方X坐标时方向相反

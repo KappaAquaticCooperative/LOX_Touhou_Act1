@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,19 +53,23 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Script\HpBarP2.cs" />
     <Compile Include="Assets\Script\CerateObject.cs" />
     <Compile Include="Assets\Script\Player.cs" />
+    <Compile Include="Assets\Script\HeartObject.cs" />
     <Compile Include="Assets\Script\Transport.cs" />
+    <Compile Include="Assets\Script\HpBar.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\MpBar.cs" />
-    <Compile Include="Assets\Script\PlatformMove.cs" />
+    <Compile Include="Assets\Script\X_PlatformMove.cs" />
     <Compile Include="Assets\Script\BackGroundMove.cs" />
     <Compile Include="Assets\Script\Player2.cs" />
-    <Compile Include="Assets\Script\HpBar.cs" />
-    <Compile Include="Assets\Script\HpBarP2.cs" />
-    <Compile Include="Assets\Script\HeartObject.cs" />
     <Compile Include="Assets\Script\HPText.cs" />
     <Compile Include="Assets\JumpObject.cs" />
+    <Compile Include="Assets\Script\Y_PlatFormMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Task\Mission1.txt" />
