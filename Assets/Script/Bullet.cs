@@ -9,17 +9,20 @@ public class Bullet : MonoBehaviour
     
 
     private Transform transform;
+    
 
 
     void Start()
     {
         
+        
+
     }
 
 
     void Update()
     {
-        
+       
         
             
             
@@ -30,11 +33,24 @@ public class Bullet : MonoBehaviour
     {
         Player player = collision.gameObject.GetComponent<Player>();
         if (player)
-            player.TakeDamage(damage);
+            player.isHurt = true;
+
         Player2 player2 = collision.gameObject.GetComponent<Player2>();
         if (player2)
-            player2.TakeDamage(damage);
+            player2.isHurt = true;
 
+        if(collision.gameObject.name== "face-block")
+        {
+            collision.gameObject.GetComponent<CerateObject>().TakeDamege(damage);
+        }
+
+        if (collision.gameObject.name == "JumpItem")
+        {
+            Destroy(collision.gameObject);
+            CerateObject.exist -= 1;
+        }
+
+        if (collision.gameObject.tag != "sukima") 
         Destroy(this.gameObject);
     }
 

@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ladder
-  - ReSetJump
+  - Pick
+  - IsGround
+  - sukima
+  - Wall
   layers:
   - Default
   - TransparentFX
