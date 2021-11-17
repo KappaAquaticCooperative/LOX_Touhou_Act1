@@ -11,10 +11,13 @@ public class Player : MonoBehaviour
     public float supperTime=5;
     private float supperTimer = 0;
     public bool isSupper = false;
-    //受伤时间
+    //受伤,HP为零时摧毁时间
     public float hurtTime;
     private float hurtTimer;
     public bool isHurt = false;
+    public float destroyTime = 1;
+    private float destoryTimer;
+    public bool isDestory = false;
 
     //生命
     public float HP=3;
@@ -70,17 +73,17 @@ public class Player : MonoBehaviour
             moveDir.x = -1;
         }
 
-        if (moveDir != Vector2.zero && isHurt == false) 
+        if (moveDir != Vector2.zero && isHurt == false && !isDestory) 
             Move(moveDir);
         else
             Idle();
 
         //2.控制跳跃
-        if (Input.GetKeyDown(KeyCode.W) && isHurt == false)
+        if (Input.GetKeyDown(KeyCode.W) && isHurt == false && !isDestory)
             Jump();
 
         //3.控制攻击
-        if (Input.GetKey(KeyCode.J) && isHurt == false) 
+        if (Input.GetKey(KeyCode.J) && isHurt == false && !isDestory) 
         {
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootTime)
@@ -150,6 +153,8 @@ public class Player : MonoBehaviour
         //    dashTimer += Time.deltaTime;
         //    rigidbody2D.velocity = new Vector2(2 * -speed, 0);
         //}
+
+
 
         //检测超级时间，用于计时结束后回到普通状态
         EnterSupperTime();
@@ -226,20 +231,31 @@ public class Player : MonoBehaviour
         {
             hurtTimer = 0;
             isHurt = false;
+            isDestory = true;
             this.TakeDamage(1);
         }
+        if (isDestory == true)
+        {
+            destoryTimer += Time.deltaTime;
+            if (destoryTimer >= destroyTime)
+            {
+                destoryTimer = 0;
+                isDestory = false;
+                this.transform.position = reSetPoint.transform.position;
+                this.rigidbody2D.velocity = new Vector2(0, 0);
+                
+                if (HP <= 0)
+                    Destroy(this.gameObject);
+            }
+        }
     }
+    
     //被伤害（控制数值）
     public void TakeDamage(float damage)
     {
         this.HP -= damage;
-        this.transform.position = reSetPoint.transform.position;
-        this.rigidbody2D.velocity = new Vector2(0, 0);
-        if (HP <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-
+        
+      
     }
 
     //超级时间
@@ -263,19 +279,25 @@ public class Player : MonoBehaviour
     void AnimationController()
     {
         //1.左右移动
-        if(!isMoving && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)
+        if(!isMoving && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt && !isDestory)
             m_animator.Play("Idle");
-        else if(Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)
+        else if(Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt && !isDestory)
             m_animator.Play("Run");
         //2.跳跃动画
-        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt)
+        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt && !isDestory)
             m_animator.Play("Jump");
-        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && !isHurt)
+        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && !isHurt && !isDestory) 
             m_animator.Play("Fall");
         //3.受伤动画
         if (isHurt == true)
         {
             m_animator.Play("Hurt");
+        }
+        //4.被摧毁
+        if(isDestory==true)
+        {
+            
+            m_animator.Play("Death");
         }
     }
 
