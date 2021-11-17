@@ -16,6 +16,9 @@ public class Player2 : MonoBehaviour
     public float hurtTime;
     private float hurtTimer;
     public bool isHurt = false;
+    public float destroyTime = 1;
+    private float destoryTimer;
+    public bool isDestory = false;
     //动画控制
     public Animator m_animator;
     //生命
@@ -71,11 +74,11 @@ public class Player2 : MonoBehaviour
             right = true;
             MoveDir.x = 1;
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isHurt == false)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isHurt == false && !isDestory)
         {
             Jump();
         }
-        if (MoveDir != Vector2.zero && isHurt == false)
+        if (MoveDir != Vector2.zero && isHurt == false && !isDestory)
         {
             Move(MoveDir);
         }
@@ -139,7 +142,7 @@ public class Player2 : MonoBehaviour
         //}
 
         //射击
-        if (Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKey(KeyCode.Keypad1) && !isDestory && !isHurt)
         {
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootTime)
@@ -242,19 +245,18 @@ public class Player2 : MonoBehaviour
     void AnimatorController() 
     {
 
-        if (isMoving == false && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)  
+        if (isMoving == false && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt && !isDestory)   
             m_animator.Play("Idle");
-        if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y)< 0.1f && !isHurt)
+        if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y)< 0.1f && !isHurt && !isDestory)
             m_animator.Play("Run");
-        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt)
+        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt && !isDestory)
             m_animator.Play("Jump");
-        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y < 0 && !isHurt)  
+        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y < 0 && !isHurt && !isDestory)  
             m_animator.Play("Fall");
-        if (isHurt == true)
-        {
+        if (isHurt == true)        
             m_animator.Play("Hurt");
-            
-        }
+        if (isDestory == true)
+            m_animator.Play("Death");
     }
 
     //被伤害（控制动画）
@@ -268,19 +270,29 @@ public class Player2 : MonoBehaviour
         {
             hurtTimer = 0;
             isHurt = false;
+            isDestory = true;
             this.TakeDamage(1);
+        }
+        if (isDestory == true)
+        {
+            destoryTimer += Time.deltaTime;
+            if (destoryTimer >= destroyTime)
+            {
+                isDestory = false;
+
+                this.transform.position = reSetPoint.transform.position;
+                this.rigidbody2D.velocity = new Vector2(0, 0);
+                destoryTimer = 0;
+                if (HP <= 0)
+                    Destroy(this.gameObject);
+            }
         }
     }
     //被伤害（控制数值）
     public void TakeDamage(float damage)
     {
         this.HP -= damage;
-        this.transform.position = reSetPoint.transform.position;
-        this.rigidbody2D.velocity = new Vector2(0, 0);
-        if (HP <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        
 
     }
 
