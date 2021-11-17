@@ -6,15 +6,17 @@ public class Bullet : MonoBehaviour
 {
     public float speed=2;
     public float damage=1;
-    
+    //判断子弹是否转向
+    public bool changed = false;
 
     private Transform transform;
-    
+    private Rigidbody2D rigidbody2D;
 
 
     void Start()
     {
-        
+        transform = GetComponent<Transform>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         
 
     }
@@ -52,6 +54,25 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.tag != "sukima") 
         Destroy(this.gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Mirror" && collision.transform.rotation.z > 0) 
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.y, rigidbody2D.velocity.x);
+            transform.rotation = Quaternion.Euler(transform.rotation.x,transform.rotation.y,transform.rotation.z-90);
+            changed = true;
+        }
+        if (collision.tag == "Mirror" && collision.transform.rotation.z < 0)
+        {
+            rigidbody2D.velocity = new Vector2(-rigidbody2D.velocity.y, -rigidbody2D.velocity.x);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90);
+            changed = true;
+        }
+        //if (collision.tag == "Mirror" && changed == true)
+        //{
+        //    rigidbody2D.ve
+        //}
     }
 
 
