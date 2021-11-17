@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     public float shootTimer = 0;
     //可以跳跃  思路：值为1时进行第一次跳跃，2时二段跳（跳跃力低于第一段），3时无法跳跃，触发碰撞检测时回到1
     public JumpState jumpFlag = JumpState.Ground;
+    //获取到的道具的数量
+    public int itemNumber = 0;
+
     //私有变量
     private float dashTimer = 0;
     private bool isMoving = false;
@@ -56,18 +59,18 @@ public class Player : MonoBehaviour
     {
         //1.控制移动,测试完备
         Vector2 moveDir = Vector2.zero;
-        if (Input.GetKey(KeyCode.D) && isHurt == false)
+        if (Input.GetKey(KeyCode.D))
         {
             right = true;
             moveDir.x = 1;
         }
-        if (Input.GetKey(KeyCode.A) && isHurt == false)
+        if (Input.GetKey(KeyCode.A))
         {
             right = false;
             moveDir.x = -1;
         }
 
-        if (moveDir != Vector2.zero)
+        if (moveDir != Vector2.zero && isHurt == false) 
             Move(moveDir);
         else
             Idle();
@@ -260,18 +263,20 @@ public class Player : MonoBehaviour
     void AnimationController()
     {
         //1.左右移动
-        if(!isMoving && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f)
+        if(!isMoving && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)
             m_animator.Play("Idle");
-        else if(Mathf.Abs(rigidbody2D.velocity.y) < 0.1f)
+        else if(Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)
             m_animator.Play("Run");
         //2.跳跃动画
-        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0)
+        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt)
             m_animator.Play("Jump");
-        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f)
+        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && !isHurt)
             m_animator.Play("Fall");
         //3.受伤动画
         if (isHurt == true)
+        {
             m_animator.Play("Hurt");
+        }
     }
 
 }

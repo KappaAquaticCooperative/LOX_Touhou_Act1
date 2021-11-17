@@ -8,6 +8,7 @@ TagManager:
   - IsGround
   - sukima
   - Wall
+  - Mirror
   layers:
   - Default
   - TransparentFX

@@ -40,17 +40,15 @@ public class Player2 : MonoBehaviour
     public float shootTimer = 0;
     //可以跳跃  思路：值为1时进行第一次跳跃，2时二段跳（跳跃力低于第一段），3时无法跳跃，触发碰撞检测时回到1
     public JumpState jumpFlag = JumpState.Ground;
-    //
+    //获取到的道具数量
+    public int itemNumber = 0;
     //私有变量
     private float dashTimer = 0;
     
     private Transform transform;
     private Rigidbody2D rigidbody2D;
 
-    private void Awake()
-    {
-        
-    }
+   
     void Start()
     {
         transform = this.gameObject.GetComponent<Transform>();
@@ -73,11 +71,11 @@ public class Player2 : MonoBehaviour
             right = true;
             MoveDir.x = 1;
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isHurt == false)
         {
             Jump();
         }
-        if (MoveDir != Vector2.zero)
+        if (MoveDir != Vector2.zero && isHurt == false)
         {
             Move(MoveDir);
         }
@@ -243,16 +241,20 @@ public class Player2 : MonoBehaviour
     //控制动画的方法
     void AnimatorController() 
     {
-        if (isMoving == false && Mathf.Abs(rigidbody2D.velocity.y)<0.1f)
+
+        if (isMoving == false && Mathf.Abs(rigidbody2D.velocity.y) < 0.1f && !isHurt)  
             m_animator.Play("Idle");
-        if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y)<0.1f)
+        if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y)< 0.1f && !isHurt)
             m_animator.Play("Run");
-        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0)
+        if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y > 0 && !isHurt)
             m_animator.Play("Jump");
-        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y < 0)  
+        else if (Mathf.Abs(rigidbody2D.velocity.y) >= 0.1f && rigidbody2D.velocity.y < 0 && !isHurt)  
             m_animator.Play("Fall");
         if (isHurt == true)
+        {
             m_animator.Play("Hurt");
+            
+        }
     }
 
     //被伤害（控制动画）

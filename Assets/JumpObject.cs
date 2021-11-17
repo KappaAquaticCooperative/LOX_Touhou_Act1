@@ -24,15 +24,21 @@ public class JumpObject : MonoBehaviour
         Player2 player2 = collision.gameObject.GetComponent<Player2>();
         if (player)
         {
-            if (player.shootTime > player.shootLimit)           
-                player.shootTime -= shootDecrease;
+            if (player.shootTime > player.shootLimit)
+            {
+                player.shootTime -= player.shootDecrease;
+                player.itemNumber += 1;
+            }
             Destroy(this.gameObject);
             CerateObject.exist -= 1;
         }
         if (player2)
         {
             if (player2.shootTime > player2.shootLimit)
-                player2.shootTime -= shootDecrease;
+            {
+                player2.shootTime -= player2.shootDecrease;
+                player2.itemNumber += 1;
+            }
             Destroy(this.gameObject);
             CerateObject.exist -= 1;
         }
