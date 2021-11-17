@@ -33,11 +33,11 @@ public class Bullet : MonoBehaviour
     {
         Player player = collision.gameObject.GetComponent<Player>();
         if (player)
-            player.TakeDamage(damage);
+            player.isHurt = true;
 
         Player2 player2 = collision.gameObject.GetComponent<Player2>();
         if (player2)
-            player2.TakeDamage(damage);
+            player2.isHurt = true;
 
         if(collision.gameObject.name== "face-block")
         {

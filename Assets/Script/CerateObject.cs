@@ -7,7 +7,9 @@ public class CerateObject : MonoBehaviour
     //被生成的两个物体和生成的时间
     public GameObject jumpObject;
     public GameObject heartObject;
+    public GameObject SuperObject;
     public float creatTime;
+    public float S_creatTime;
     //道具随机出现的x轴
     public float RX;
     //思路：这个物体存在时会随时间召唤道具，可以通过攻击摧毁该物体
@@ -17,7 +19,7 @@ public class CerateObject : MonoBehaviour
     public static int exist;
     //私有变量
     private float creatTimer = 0;
-
+    private float S_creatTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +32,7 @@ public class CerateObject : MonoBehaviour
         creatTimer += Time.deltaTime;
         if (creatTimer >= creatTime && exist < 3)
         {
-            int random = Random.Range(1, 4);
-            
-
+            int random = Random.Range(1, 4);            
             if (random == 1 || random == 2)
             {
                 GameObject ju = GameObject.Instantiate(jumpObject);
@@ -48,12 +48,20 @@ public class CerateObject : MonoBehaviour
                 hp.tag = "Pick";
             }
             RX = Random.Range(-9, 11);
-            
-
             creatTimer = 0;
-            exist += 1;
-            
+            exist += 1;            
         }
+        S_creatTimer += Time.deltaTime;
+        if (S_creatTimer >= S_creatTime)
+        {
+            GameObject su = GameObject.Instantiate(SuperObject);
+            su.transform.position = new Vector3(RX, 5, -4.5f);
+            su.tag = "Pick";
+            RX = Random.Range(-9, 11);
+            S_creatTimer = 0;
+        }
+
+
 
         if (HP <= 0)
         {

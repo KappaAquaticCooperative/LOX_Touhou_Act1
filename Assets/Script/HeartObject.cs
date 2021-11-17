@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeartObject : MonoBehaviour
 {
     //该物体对玩家生命的改变程度
-    public float HPchange=0.5f;
+    public float HPchange=1;
     // Start is called before the first frame update
     void Start()
     {
