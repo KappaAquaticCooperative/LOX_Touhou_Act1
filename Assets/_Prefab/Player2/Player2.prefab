@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 5395888525434356415}
   - component: {fileID: 5395888523574958302}
   - component: {fileID: 5395888523574958301}
+  - component: {fileID: 1431553321}
+  - component: {fileID: 1431553320}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: IsGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,18 +121,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e936714fc1b988b4f8950b93e3496f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
   reSetPoint: {fileID: 0}
+  supperTime: 5
+  isSupper: 0
+  hurtTime: 2
+  isHurt: 0
+  destroyTime: 1
+  isDestory: 0
   HP: 3
   maxHP: 3
   Bullet: {fileID: 6479088607739899637, guid: 2343c0e3452043444bf5677692f54a96, type: 3}
   bulletSpeed: 10
-  shootLimit: 1.1
-  shootDecrease: 0.3
-  speed: 5
+  shootLimit: 0.55
+  shootDecrease: 0.1
+  FootStepSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
+  JumpSound: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
+  DeathSound: {fileID: 8300000, guid: 71d39a5d5ac45f847be45c0920fa8b36, type: 3}
+  speed: 7
   dashTime: 0.3
-  shootTime: 2.5
+  shootTime: 1
   shootTimer: 0
   jumpFlag: 1
+  itemNumber: 0
+  m_animator: {fileID: 0}
 --- !u!61 &5395888523574958302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +152,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5395888523574958296}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -164,7 +178,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5395888523574958296}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -173,3 +187,118 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0053334767, y: -0.04666824}
   m_Size: {x: 0.12732632, y: 0.23666355}
   m_Direction: 0
+--- !u!82 &1431553321
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5395888523574958296}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.15
+  m_Pitch: 1.4
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &1431553320
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5395888523574958296}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0289d2896f4fd748a1894984d496296, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
