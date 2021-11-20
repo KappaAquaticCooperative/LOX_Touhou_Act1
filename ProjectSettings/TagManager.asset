@@ -9,6 +9,7 @@ TagManager:
   - sukima
   - Wall
   - Mirror
+  - bullet
   layers:
   - Default
   - TransparentFX

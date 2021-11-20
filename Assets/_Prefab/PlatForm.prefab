@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5335646761320470470}
   m_Layer: 0
   m_Name: PlatForm
-  m_TagString: Untagged
+  m_TagString: IsGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1049538022263336742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.64, y: -1, z: 0}
-  m_LocalScale: {x: 13.387196, y: 2.583701, z: 1}
+  m_LocalScale: {x: 26.866331, y: 2.583701, z: 1}
   m_Children:
   - {fileID: 9033110805482798039}
   m_Father: {fileID: 0}
