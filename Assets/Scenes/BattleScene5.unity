@@ -1380,14 +1380,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 5395888523574958301, guid: f3b8db14bf887bc408b8d1c0e1c13624, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5395888523574958302, guid: f3b8db14bf887bc408b8d1c0e1c13624, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5395888525434356415, guid: f3b8db14bf887bc408b8d1c0e1c13624, type: 3}
       propertyPath: reSetPoint
       value: 
@@ -1799,14 +1791,6 @@ PrefabInstance:
       propertyPath: reSetPoint
       value: 
       objectReference: {fileID: 1363422025}
-    - target: {fileID: 5793759144085992089, guid: e6ddfcce901bc344abf6e200da05fc7d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5793759144085992091, guid: e6ddfcce901bc344abf6e200da05fc7d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5793759144438047529, guid: e6ddfcce901bc344abf6e200da05fc7d, type: 3}
       propertyPath: m_RootOrder
       value: 9

@@ -133,7 +133,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5793759144438047573}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -159,7 +159,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5793759144438047573}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reSetPoint: {fileID: 0}
+  defenceTime: 5
+  isDefence: 0
   supperTime: 5
   isSupper: 0
   hurtTime: 2
@@ -193,7 +195,7 @@ MonoBehaviour:
   bulletSpeed: 10
   shootLimit: 0.55
   shootDecrease: 0.1
-  FootStepSound: {fileID: 8300000, guid: 256fe0b4bad34834d91d1da5082cd617, type: 3}
+  FootStepSound: {fileID: 8300000, guid: 2e34467e81cec1249a7bf4aab4d845eb, type: 3}
   JumpSound: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
   DeathSound: {fileID: 8300000, guid: 71d39a5d5ac45f847be45c0920fa8b36, type: 3}
   speed: 7
@@ -233,8 +235,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
-  m_Pitch: 1.4
+  m_Volume: 1
+  m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
