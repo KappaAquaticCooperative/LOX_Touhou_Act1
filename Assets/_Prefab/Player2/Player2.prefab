@@ -135,7 +135,7 @@ MonoBehaviour:
   bulletSpeed: 10
   shootLimit: 0.55
   shootDecrease: 0.1
-  FootStepSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
+  FootStepSound: {fileID: 8300000, guid: 256fe0b4bad34834d91d1da5082cd617, type: 3}
   JumpSound: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
   DeathSound: {fileID: 8300000, guid: 71d39a5d5ac45f847be45c0920fa8b36, type: 3}
   speed: 7

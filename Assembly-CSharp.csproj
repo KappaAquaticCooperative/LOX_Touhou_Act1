@@ -55,21 +55,22 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Globle\Globle.cs" />
     <Compile Include="Assets\Script\UI\Battle\P2HpBar.cs" />
-    <Compile Include="Assets\UIEndMenu.cs" />
+    <Compile Include="Assets\Script\UI\Menu\UIEndMenu.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\SupperItem.cs" />
     <Compile Include="Assets\Script\UI\Battle\P1Itemtext.cs" />
     <Compile Include="Assets\Script\UI\Battle\SupperText.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\Y_PlatFormMove.cs" />
-    <Compile Include="Assets\Trap.cs" />
+    <Compile Include="Assets\Script\Core\SceneObject\Objects\Trap.cs" />
     <Compile Include="Assets\Script\UI\Battle\HpBarP2.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\MirrorObject.cs" />
     <Compile Include="Assets\Script\Globle\ScoreP1Text.cs" />
     <Compile Include="Assets\Script\UI\Menu\UIMenu.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\ObjectController\CerateObject.cs" />
-    <Compile Include="Assets\ScoreP2Text.cs" />
+    <Compile Include="Assets\Script\UI\Battle\ScoreP2Text.cs" />
     <Compile Include="Assets\Script\Core\Player\P1\Player.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\HeartObject.cs" />
-    <Compile Include="Assets\UIScene1.cs" />
+    <Compile Include="Assets\Script\UI\Menu\WinnerText.cs" />
+    <Compile Include="Assets\Script\UI\Menu\UIScene1.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\Transport.cs" />
     <Compile Include="Assets\Script\UI\Battle\HpBar.cs" />
     <Compile Include="Assets\Script\Core\Player\Bullet.cs" />
@@ -80,13 +81,17 @@
     <Compile Include="Assets\Script\Core\Player\P2\Player2.cs" />
     <Compile Include="Assets\Script\UI\Battle\HPText.cs" />
     <Compile Include="Assets\Script\Core\SceneObject\Objects\JumpObject.cs" />
-    <Compile Include="Assets\WinnerText.cs" />
+    <Compile Include="Assets\DownloadAssets\Free Pixel Art Forest\Demo\MoveBackground.cs" />
+    <Compile Include="Assets\Script\UI\Menu\BtnChooseWin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\DownloadAssets\ShootingSound\ReadMe.txt" />
+    <None Include="Assets\DownloadAssets\Free Pixel Art Forest\Contact.txt" />
     <None Include="Assets\Task\Mission1.txt" />
     <None Include="Assets\DownloadAssets\AddOns\MgLEGO Moody Tunes\Moody Tunes ReadMe.txt" />
+    <None Include="Assets\DownloadAssets\Free Pixel Art Forest\Lisense.txt" />
     <None Include="Assets\注意事项.txt" />
+    <None Include="Assets\DownloadAssets\Free Pixel Art Forest\readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

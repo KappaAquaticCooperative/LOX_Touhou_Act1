@@ -8,6 +8,10 @@ public class Player2 : MonoBehaviour
     public bool isMoving=false;
     //复活点
     public Transform reSetPoint;
+    //无敌时间
+    public float defenceTime = 5;
+    private float defenceTimer;
+    public bool isDefence = false;
     //超级时间
     public float supperTime = 5;
     private float supperTimer = 0;
@@ -65,6 +69,8 @@ public class Player2 : MonoBehaviour
         m_animator = this.gameObject.GetComponent<Animator>();
         m_audioSource = this.gameObject.GetComponent<AudioSource>();
         StartCoroutine(FootStepPlayer());
+        
+        
     }
 
 
@@ -94,10 +100,15 @@ public class Player2 : MonoBehaviour
             Idle();
         }
 
+        //动画控制
         AnimatorController();
 
-
-        
+        //无敌时间中变色
+        Defence();
+        if (isDefence == true)
+            StartCoroutine("ChangeColor");
+        if (isDefence == false) 
+            StopCoroutine("ChangeColor");
 
         //射击
         if (Input.GetKey(KeyCode.Keypad1) && !isDestory && !isHurt)
@@ -112,25 +123,16 @@ public class Player2 : MonoBehaviour
 
         //超级时间检测
         EnterSupperTime();
-        TakeHurt();
+        //思路：仅在非无敌状态下使用TakeHurt方法
+        if (!isDefence)
+        {
+            TakeHurt();
+        }
         AudioController();
     }
 
    
-    //携程
-    IEnumerator FootStepPlayer()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.2f);
-            if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y) < 0.05f)
-            {
-                m_audioSource.Stop();
-                m_audioSource.clip = FootStepSound;
-                m_audioSource.Play();
-            }
-        }
-    }
+    
 
 
     //碰撞检测
@@ -267,6 +269,8 @@ public class Player2 : MonoBehaviour
                 this.transform.position = reSetPoint.transform.position;
                 this.rigidbody2D.velocity = new Vector2(0, 0);
                 destoryTimer = 0;
+                //无敌时间开始计时
+                isDefence = true;
                 if (HP <= 0)
                     Destroy(this.gameObject);
             }
@@ -282,7 +286,48 @@ public class Player2 : MonoBehaviour
         }
 
     }
+    //无敌时间
+    public void Defence()
+    {
+        if (isDefence == true)
+        {
+            defenceTimer += Time.deltaTime;
+        }
+        if (defenceTimer >= defenceTime)
+        {
+            isDefence = false;
+            defenceTimer = 0;
+        }
+    }
 
+    //携程
+    //携程1.脚步
+    IEnumerator FootStepPlayer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            if (isMoving == true && Mathf.Abs(rigidbody2D.velocity.y) < 0.05f)
+            {
+                m_audioSource.Stop();
+                m_audioSource.clip = FootStepSound;
+                m_audioSource.Play();
+            }
 
+        }
+    }
+    //携程2.在无敌时间变色
+    IEnumerator ChangeColor()
+    {
+        while (true)
+        {
+            float r, g, b;
+            r = Random.Range(0, 1f);
+            g = Random.Range(0, 1f);
+            b = Random.Range(0, 1f);
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
 
 }
